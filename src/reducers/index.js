@@ -5,11 +5,11 @@
 // ATENÇÃO: você obrigatoriamente tem que utilizar as chaves "user" e "wallet" no seu estado global
 
 import { combineReducers } from 'redux';
-import { user, wallet } from '../actions';
+import { userAction, walletAction } from '../actions';
 
 const rootReducer = combineReducers({
-  user,
-  wallet,
+  userAction,
+  walletAction,
 });
 
 export default rootReducer;

@@ -1,11 +1,11 @@
 import { USER_LOGIN, WALLET } from './actionsType';
 
-export const user = (value) => ({
+export const userAction = (value) => ({
   type: USER_LOGIN,
   value,
 });
 
-export const wallet = (value) => ({
+export const walletAction = (value) => ({
   type: WALLET,
   value,
 });
