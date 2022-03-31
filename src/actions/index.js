@@ -1,8 +1,8 @@
 import { USER_LOGIN, WALLET } from './actionsType';
 
-export const userAction = (value) => ({
+export const userAction = (user) => ({
   type: USER_LOGIN,
-  value,
+  user,
 });
 
 export const walletAction = (value) => ({

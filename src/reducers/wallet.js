@@ -6,7 +6,7 @@ const initialState = {
   expenses: [],
 };
 
-function userReducer(state = initialState, action) {
+function walletReducer(state = initialState, action) {
   switch (action.type) {
   case WALLET:
     return action.value;
@@ -15,4 +15,4 @@ function userReducer(state = initialState, action) {
   }
 }
 
-export default userReducer;
+export default walletReducer;

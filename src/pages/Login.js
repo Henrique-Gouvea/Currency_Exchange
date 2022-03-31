@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { userAction } from '../actions';
 
 class Login extends React.Component {
@@ -8,23 +10,28 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      btn: true,
     };
+  }
+
+  validation = () => {
+    const { email, password } = this.state;
+    const regex = /\S+@\S+\.\S+/; // regex https://www.horadecodar.com.br/2020/09/07/expressao-regular-para-validar-e-mail-javascript-regex/
+    const sixValidation = 6;
+    if ((password.length >= sixValidation) && (regex.test(email))) {
+      return false;
+    }
+    return true;
   }
 
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    const { email, password } = this.state;
-    const regex = /\S+@\S+\.\S+/; // regex https://www.horadecodar.com.br/2020/09/07/expressao-regular-para-validar-e-mail-javascript-regex/
-    const fiveValidation = 5;
-    if ((regex.test(email)) && (password.length > fiveValidation)) {
-      this.setState({ btn: false });
-    }
+    // this.validation();
   }
 
   render() {
-    const { email, password, btn } = this.state;
+    const { email, password } = this.state;
+    const { user } = this.props;
     return (
       <div>
         <h1>Login</h1>
@@ -44,7 +51,16 @@ class Login extends React.Component {
           value={ password }
           name="password"
         />
-        <button type="submit" disabled={ btn }>Entrar</button>
+        <Link to="/carteira">
+          <button
+            type="submit"
+            disabled={ this.validation() }
+            onClick={ () => user({ email }) }
+          >
+            Entrar
+
+          </button>
+        </Link>
       </div>);
   }
 }
@@ -52,5 +68,9 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   user: (elem) => dispatch(userAction(elem)),
 });
+
+Login.propTypes = {
+  user: PropTypes.object,
+}.isRequired;
 
 export default connect(null, mapDispatchToProps)(Login);
