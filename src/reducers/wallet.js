@@ -8,8 +8,6 @@ const initialState = {
 
 function walletReducer(state = initialState, action) {
   switch (action.type) {
-  case WALLET:
-    return action.value;
   default:
     return state;
   }
