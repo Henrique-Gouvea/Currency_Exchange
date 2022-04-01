@@ -1,15 +1,10 @@
-import { USER_LOGIN, FETCH_CURRENCIES } from './actionsType';
+import { USER_LOGIN, FETCH_CURRENCIES, EXPENSES, ASK } from './actionsType';
 import fetchCurrencies from '../services/Api';
 
 export const userAction = (user) => ({
   type: USER_LOGIN,
   user,
 });
-
-// export const walletAction = (value) => ({
-//   type: WALLET,
-//   value,
-// });
 
 export const actionUpdateCurrencies = (currencies) => ({
   type: FETCH_CURRENCIES,
@@ -22,3 +17,13 @@ export const actionFetchCurrencies = () => async (dispatch) => {
   const currenciesOK = currencies.filter((ele) => ele !== 'USDT');
   dispatch(actionUpdateCurrencies(currenciesOK));
 };
+
+export const actionExpenses = (expenses) => ({
+  type: EXPENSES,
+  expenses,
+});
+
+export const actionAsk = (ask) => ({
+  type: ASK,
+  ask,
+});
