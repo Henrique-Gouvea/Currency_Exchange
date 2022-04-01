@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 // import teste from '../services/Api';
 import { actionFetchCurrencies } from '../actions';
+import Form from '../components/Form';
 
 class Wallet extends React.Component {
   componentDidMount = async () => {
@@ -15,6 +16,7 @@ class Wallet extends React.Component {
     return (
       <>
         <Header />
+        <Form />
         <p>teste</p>
       </>
     );

@@ -20,6 +20,5 @@ export const actionFetchCurrencies = () => async (dispatch) => {
   const Obj = await fetchCurrencies();
   const currencies = Object.keys(Obj);
   const currenciesOK = currencies.filter((ele) => ele !== 'USDT');
-  console.log(currenciesOK);
   dispatch(actionUpdateCurrencies(currenciesOK));
 };
