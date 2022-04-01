@@ -10,8 +10,6 @@ class Table extends React.Component {
 
   render() {
     const { expenses } = this.props;
-    console.log(expenses);
-
     return (
       <table>
         <thead>
