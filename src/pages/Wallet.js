@@ -5,6 +5,7 @@ import Header from '../components/Header';
 // import teste from '../services/Api';
 import { actionFetchCurrencies } from '../actions';
 import Form from '../components/Form';
+import Table from '../components/Table';
 
 class Wallet extends React.Component {
   componentDidMount = async () => {
@@ -17,6 +18,7 @@ class Wallet extends React.Component {
       <>
         <Header />
         <Form />
+        <Table />
         <p>teste</p>
       </>
     );
