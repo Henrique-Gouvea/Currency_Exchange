@@ -2,17 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetchCurrencies from '../services/Api';
-import { actionExpenses } from '../actions';
+import { actionExpenses, actionAsk } from '../actions';
+
+const ALIMENTACAO = 'Alimentação';
 
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: '0',
       description: '',
-      coins: 'USD',
+      currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: ALIMENTACAO,
       exchangeRates: '',
     };
   }
@@ -24,16 +26,35 @@ class Form extends React.Component {
     });
   };
 
-  addExpenses = async (event) => {
+  clearState = () => {
+    console.log('aki');
+    this.setState({
+      value: '0',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: ALIMENTACAO,
+      exchangeRates: '',
+    });
+  }
+
+teste = async () => {
+  const { state } = this;
+  const { expenses, expensesStore, ask } = this.props;
+  const exchangeRates = await fetchCurrencies();
+  expenses({ ...state, exchangeRates, id: expensesStore.length });
+  const valueAskCoin = exchangeRates[state.currency].ask;
+  ask(valueAskCoin * state.value);
+}
+
+  addExpenses = (event) => {
     event.preventDefault();
-    const { state } = this;
-    const { expenses, expensesStore } = this.props;
-    const exchangeRates = await fetchCurrencies();
-    expenses({ ...state, exchangeRates, id: expensesStore.length });
+    this.teste();
+    this.clearState();
   }
 
   render() {
-    const { value, description, coins, method, tag } = this.state;
+    const { value, description, currency, method, tag } = this.state;
     const { currencies } = this.props;
     return (
       <form>
@@ -53,13 +74,13 @@ class Form extends React.Component {
           data-testid="description-input"
           onChange={ this.handleChange }
         />
-        <label htmlFor="coins">
+        <label htmlFor="currency">
           Moeda
           <select
-            id="coins"
-            name="coins"
+            id="currency"
+            name="currency"
             onChange={ this.handleChange }
-            value={ coins }
+            value={ currency }
           >
             {currencies.map((cur) => (
               <option
@@ -111,6 +132,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   expenses: (elem) => dispatch(actionExpenses(elem)),
+  ask: (elem) => dispatch(actionAsk(elem)),
 });
 
 Form.propTypes = {

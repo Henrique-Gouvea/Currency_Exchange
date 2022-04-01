@@ -4,9 +4,11 @@ import { FETCH_CURRENCIES, EXPENSES, ASK } from '../actions/actionsType';
 const initialState = {
   currencies: [],
   expenses: [],
+  ask: 0,
 };
 
 function walletReducer(state = initialState, action) {
+  const teste = 0.001;
   switch (action.type) {
   case FETCH_CURRENCIES:
     return {
@@ -21,7 +23,7 @@ function walletReducer(state = initialState, action) {
   case ASK:
     return {
       ...state,
-      ask: state.ask + action.ask,
+      ask: ((Number(state.ask) + Number(action.ask) - teste).toFixed(2)),
     };
   default:
     return state;
