@@ -45,10 +45,6 @@ class Table extends React.Component {
               <td>Real</td>
             </tr>
           ))}
-          <tr>
-            <td>January</td>
-            <td>$100</td>
-          </tr>
         </tbody>
       </table>
     );
