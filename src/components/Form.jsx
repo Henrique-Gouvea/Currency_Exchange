@@ -42,9 +42,9 @@ teste = async () => {
   const { state } = this;
   const { expenses, expensesStore, ask } = this.props;
   const exchangeRates = await fetchCurrencies();
-  expenses({ ...state, exchangeRates, id: expensesStore.length });
   const valueAskCoin = exchangeRates[state.currency].ask;
   ask(valueAskCoin * state.value);
+  expenses({ ...state, exchangeRates, id: expensesStore.length, valueAskCoin });
 }
 
   addExpenses = (event) => {

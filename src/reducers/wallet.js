@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { FETCH_CURRENCIES, EXPENSES, ASK } from '../actions/actionsType';
+import { FETCH_CURRENCIES, EXPENSES, ASK, EXPENSES_REMOVE } from '../actions/actionsType';
 
 const initialState = {
   currencies: [],
@@ -24,6 +24,12 @@ function walletReducer(state = initialState, action) {
     return {
       ...state,
       ask: ((Number(state.ask) + Number(action.ask) - teste).toFixed(2)),
+    };
+  case EXPENSES_REMOVE:
+    return {
+      ...state,
+      ask: (state.ask - action.ask).toFixed(2),
+      expenses: action.expenses,
     };
   default:
     return state;
