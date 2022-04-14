@@ -7,3 +7,5 @@ export const EXPENSES = 'EXPENSES';
 export const ASK = 'ASK';
 
 export const EXPENSES_REMOVE = 'EXPENSES_REMOVE';
+
+export const ASK_INIT = 'ASK_INIT';

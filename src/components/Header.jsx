@@ -10,6 +10,7 @@ class Header extends React.Component {
         <h3>Trybewallet</h3>
         <h3 data-testid="email-field">{email}</h3>
         <h3 data-testid="total-field">{ask > 0 ? ask : 0}</h3>
+        {/* <h3 data-testid="total-field">{ask}</h3> */}
         <h3 data-testid="header-currency-field">BRL</h3>
       </div>);
   }

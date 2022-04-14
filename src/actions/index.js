@@ -2,7 +2,8 @@ import { USER_LOGIN,
   FETCH_CURRENCIES,
   EXPENSES,
   ASK,
-  EXPENSES_REMOVE } from './actionsType';
+  EXPENSES_REMOVE,
+  ASK_INIT } from './actionsType';
 import fetchCurrencies from '../services/Api';
 
 export const userAction = (user) => ({
@@ -32,8 +33,12 @@ export const actionAsk = (ask) => ({
   ask,
 });
 
-export const actionRemoveExpenses = (expenses, ask) => ({
+export const actionRemoveExpenses = (expenses) => ({
   type: EXPENSES_REMOVE,
   expenses,
+});
+
+export const actionAskInit = (ask) => ({
+  type: ASK_INIT,
   ask,
 });

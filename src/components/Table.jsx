@@ -1,9 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionRemoveExpenses } from '../actions';
+import { actionAsk, actionRemoveExpenses, actionAskInit } from '../actions';
 
 class Table extends React.Component {
+  componentDidMount() {
+    const { expenses, askInit, ask } = this.props;
+    let total = 0;
+    console.log(expenses);
+    expenses.forEach((exp) => {
+      console.log(exp.value);
+      const askCurrenc = exp.exchangeRates[exp.currency].ask;
+      console.log(askCurrenc * exp.value);
+      total += (askCurrenc * exp.value);
+    });
+    console.log(total);
+    ask(0);
+    askInit(total);
+  }
+
   getExchangeRates = (obj) => {
     const currency = obj.exchangeRates[obj.currency];
     return [currency.name, currency.ask];
@@ -14,7 +29,6 @@ class Table extends React.Component {
     const exludedCurrie = expenses.filter((exp) => Number(exp.id) !== Number(target.id));
     const getAsk = expenses.find((exp) => Number(exp.id) === Number(target.id));
     const teste = (getAsk.valueAskCoin * getAsk.value);
-    console.log(teste);
     expensesDispa(exludedCurrie, teste);
   }
 
@@ -72,10 +86,13 @@ class Table extends React.Component {
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
+  askSta: state.wallet.ask,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   expensesDispa: (elem, ele) => dispatch(actionRemoveExpenses(elem, ele)),
+  ask: (elem) => dispatch(actionAsk(elem)),
+  askInit: (elem) => dispatch(actionAskInit(elem)),
 });
 
 Table.propTypes = {
